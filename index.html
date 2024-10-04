@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+
+      <style>
+        html, body {
+          width: 100% !important;
+          height: auto !important;
+
+          padding: 0px;
+          margin: 0px;
+
+          background-color: #333;
+        }
+
+        input {
+          height: 25px !important;
+        }
+
+        button {
+          padding-left: 10px;
+          padding-right: 10px;
+          
+          height: 25px;
+
+          font-size: 12pt;
+         
+          font-family: 'Times New Roman', Times, serif;
+        }
+
+        h1 {
+          font-size: 40pt;
+        }
+        
+        label {
+          font-size: 24pt;
+
+        }
+        
+        .item {
+          margin-bottom: 2%;
+        }
+
+        .todo {
+
+          
+          font-weight: bold;
+          width: 100% !important;
+
+          min-height: 100% !important;
+
+          height: auto !important;
+          
+
+          position: relative;
+      
+          padding: 5% !important;
+      
+          margin: 0px;
+      
+          background-color: #333;
+        
+          color: #fff;
+        }
+
+        h2 {
+          border-bottom: 1px #fff solid;
+        }
+      </style>
+
+  </head>
+  <body>
+      <div class="todo">
+          <h1>Meu To Do List Sem consultar a internet</h1>
+          <div class="form-todo">
+            <input type="text" id="input-task" />
+            <button onclick="addTask()">Save Task</button>
+          </div>
+          <br />
+
+          <h2>Tasks</h2>
+          <div class="task-list"></div>
+
+          <h2>Working</h2>
+          <div class="work-list"></div>
+
+          <h2>Done</h2>
+          <div class="done-list"></div>
+
+        </div>
+  </body>
+</html>
+
+<script>
+
+function moveToTasks(item, index, currentArray) {
+    switch(currentArray) {
+      case 'done':
+        saveTask(item);
+        deleteDone(index);
+      break;
+      case 'working':
+        saveTask(item);
+        deleteWorking(index);
+      break;
+    }
+  }
+
+  function moveToDone(item, index, currentArray) {
+    switch(currentArray) {
+      case 'tasks':
+        saveDone(item);
+        deleteTask(index);
+      break;
+      case 'working':
+        saveDone(item);
+        deleteWorking(index);
+      break;
+    }
+  }
+
+  function moveToWorking(item, index, currentArray) {
+    switch(currentArray) {
+      case 'tasks' :
+        deleteTask(index);
+        saveWorking(item);
+      break;
+      case 'done':
+        deleteDone(index);
+        saveWorking(item);
+      break;
+    }
+  }
+
+  function deleteItem(index, currentArray) {
+    switch(currentArray) {
+      case 'tasks':
+        deleteTask(index);
+        break;
+      case 'working':
+        deleteWorking(index);
+        break;
+      case 'done':
+        deleteDone(index);
+        break;  
+    }
+  }
+
+  function getHtmlItem(item, index, currentArray) {
+    return `
+      <div class='item'>
+        <label>${item}</label>
+        <button onclick="deleteItem(${index}, '${currentArray}')">Remove</button>
+        <button onclick="moveToTasks('${item}', ${index}, '${currentArray}')">Move to Tasks</button>
+        <button onclick="moveToWorking('${item}', ${index}, '${currentArray}')">Move to working</button>
+        <button onclick="moveToDone('${item}', ${index}, '${currentArray}')">Move to done</button>
+      </div>
+    `;
+  }
+
+  function getAllHtmlItem(itemList, currentArray) {
+    let fullItem = '';
+    itemList.forEach((item, index) => {
+      fullItem = fullItem + getHtmlItem(item, index, currentArray);
+    });
+    return fullItem;
+  }
+
+  function getTasks() {
+    const tasks = JSON.parse(localStorage.getItem('Tasks'));
+    return tasks == undefined? [] : tasks ;
+  }
+
+  function saveTask(task) {
+    const newTasks = getTasks();
+    newTasks.push(task);
+    localStorage.setItem('Tasks', JSON.stringify(newTasks));
+    updateTaskList()
+  }
+
+  function deleteTask(indexToRemove) {
+    const newTasks = getTasks().filter((data, taskIndex) => taskIndex !== indexToRemove);
+    localStorage.setItem('Tasks', JSON.stringify(newTasks));
+    updateTaskList()
+  }
+
+  function addTask() {
+    const inputValue = document.getElementById('input-task').value;
+    if (inputValue && inputValue.length > 0) {
+      saveTask(inputValue);
+      updateTaskList();
+      document.getElementById('input-task').value = "";
+      return;
+    }
+    alert("Digite uma task válida!");
+  }
+
+  function updateTaskList() {
+    const tasks = getTasks();
+    document.getElementsByClassName('task-list')
+      .item(0).innerHTML = getAllHtmlItem(tasks, 'tasks');
+  }
+
+  function getWorking() {
+    const working = JSON.parse(localStorage.getItem("Working"));
+    return working? working : [];
+  }
+
+  function saveWorking(work) {
+    const working = getWorking();
+    working.push(work);
+    localStorage.setItem('Working', JSON.stringify(working));
+    updateWorkingList();
+  }
+
+  function deleteWorking(indexOfWorkToRemove) {
+    const working = getWorking().filter((work, indexWork) => indexWork !== indexOfWorkToRemove);
+    localStorage.setItem('Working', JSON.stringify(working));
+    updateWorkingList();
+  }
+
+  function updateWorkingList() {
+    const working = getWorking();
+    document.getElementsByClassName('work-list')
+      .item(0).innerHTML = getAllHtmlItem(working, 'working');
+  }
+
+  function getDoneList() {
+    const doneList = JSON.parse(localStorage.getItem('DoneList'));
+    return doneList ? doneList : [];
+  }
+
+  function saveDone(done) {
+    const doneList = getDoneList();
+    doneList.push(done);
+    localStorage.setItem('DoneList', JSON.stringify(doneList));
+    updateDoneList();
+  }
+
+  function deleteDone(indexToRemove) {
+    const doneList = getDoneList();
+    const currentDoneList = doneList.filter((done, index) => index !== indexToRemove);
+    localStorage.setItem('DoneList', JSON.stringify(currentDoneList));
+    updateDoneList();
+  }
+  
+  function updateDoneList() {
+    const doneList = getDoneList();
+    document.getElementsByClassName('done-list')
+      .item(0).innerHTML = getAllHtmlItem(doneList, 'done');
+  }
+
+  updateTaskList();
+  updateWorkingList();
+  updateDoneList();
+</script>
