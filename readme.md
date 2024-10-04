@@ -5,3 +5,5 @@
 
 ## criei esse todo list todo sem consultar a internet, com o objetivo de exercitar meu javascript e avaliar meu nível de habilidade com a tecnologia.
 
+
+https://www.linkedin.com/in/erickwendel/
