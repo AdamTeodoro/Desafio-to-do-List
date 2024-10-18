@@ -251,6 +251,16 @@ function moveToTasks(item, index, currentArray) {
     const doneList = getDoneList();
     document.getElementsByClassName('done-list')
       .item(0).innerHTML = getAllHtmlItem(doneList, 'done');
+  } 
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  function caraOuCoroa() {
+    return getRandomInt(0, 1) == 0 ? 'Cara': 'Coroa';
   }
 
   updateTaskList();
