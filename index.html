@@ -267,10 +267,10 @@ function moveToTasks(item, index, currentArray) {
   }
 
   function caraOuCoroa() {
-    document.getElementById('input-cara-ou-coroa').setAttribute("enabled", "enabled");
+    document.getElementById('input-cara-ou-coroa').disabled = true;
     const result = getRandomInt(0, 1) == 0 ? 'Cara': 'Coroa';
     document.getElementById('input-cara-ou-coroa').value = result;
-    document.getElementById('input-cara-ou-coroa').setAttribute("disabled", "disabled");
+    document.getElementById('input-cara-ou-coroa').disabled = false;
   }
 
   updateTaskList();
