@@ -268,7 +268,7 @@ function moveToTasks(item, index, currentArray) {
 
   function caraOuCoroa() {
     document.getElementById('input-cara-ou-coroa').disabled = true;
-    const result = getRandomInt(0, 1) == 0 ? 'Cara': 'Coroa';
+    const result = getRandomInt(1, 2) == 1 ? 'Cara': 'Coroa';
     document.getElementById('input-cara-ou-coroa').value = result;
     document.getElementById('input-cara-ou-coroa').disabled = false;
   }
