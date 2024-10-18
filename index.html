@@ -91,6 +91,11 @@
           <div class="done-list"></div>
 
         </div>
+        <h2>Cara ou Coroa</h2>
+          <div class="form-todo">
+            <input type="text" id="input-cara-ou-coroa" />
+            <button onclick="caraOuCoroa()">Cara ou coroa</button>
+          </div>
   </body>
 </html>
 
@@ -260,7 +265,10 @@ function moveToTasks(item, index, currentArray) {
   }
 
   function caraOuCoroa() {
-    return getRandomInt(0, 1) == 0 ? 'Cara': 'Coroa';
+    document.getElementById('input-cara-ou-coroa').setAttribute("disabled", "enabled");
+    const result = getRandomInt(0, 1) == 0 ? 'Cara': 'Coroa';
+    document.getElementById('input-cara-ou-coroa').value = result;
+    document.getElementById('input-cara-ou-coroa').setAttribute("disabled", "disabled");
   }
 
   updateTaskList();
