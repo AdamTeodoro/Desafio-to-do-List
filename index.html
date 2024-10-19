@@ -281,7 +281,7 @@ function moveToTasks(item, index, currentArray) {
   function getHistoryFullString() {
     let historyFullString = "";
     for (let item of historyCaraOuCoroa) {
-      historyFullString += item;
+      historyFullString += `<div>${item}</div>`;
     }
     return historyFullString;
   }
