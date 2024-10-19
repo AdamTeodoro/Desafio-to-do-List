@@ -267,7 +267,7 @@ function moveToTasks(item, index, currentArray) {
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  let history = []
+  let historyCaraOuCoroa = []
   
   /**
    * Se o log ainda for exibido, reclame do trabalho de gringo
@@ -280,14 +280,14 @@ function moveToTasks(item, index, currentArray) {
 
   function getHistoryFullString() {
     let historyFullString = "";
-    for (let item of history) {
+    for (let item of historyCaraOuCoroa) {
       historyFullString += item;
     }
     return historyFullString;
   }
 
   function addHistory(result) {
-      history.push(result);
+      historyCaraOuCoroa.push(result);
       updateDiplayHistory();
   }
 
