@@ -265,7 +265,9 @@ function moveToTasks(item, index, currentArray) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
   }
-
+  /**
+   * Se o log ainda for exibido, reclame do trabalho de gringo
+   */
   function caraOuCoroa() {
     const result = getRandomInt(0, 2) == 1 ? 'Cara' : 'Coroa';
     document.getElementById('input-cara-ou-coroa').value = result;
