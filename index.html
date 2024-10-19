@@ -95,7 +95,8 @@
             <input type="text" id="input-cara-ou-coroa" />
             <button onclick="caraOuCoroa()">Cara ou coroa</button>
           </div>
-        
+          <h2>Histórico</h2>
+          <div id="history"></div>
         </div>
   
   </body>
@@ -265,12 +266,33 @@ function moveToTasks(item, index, currentArray) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
   }
+
+  let history = []
+  
   /**
    * Se o log ainda for exibido, reclame do trabalho de gringo
    */
   function caraOuCoroa() {
     const result = getRandomInt(0, 2) == 1 ? 'Cara' : 'Coroa';
+    addHistory(result);
     document.getElementById('input-cara-ou-coroa').value = result;
+  }
+
+  function getHistoryFullString() {
+    let historyFullString = "";
+    for (let item of history) {
+      historyFullString += item;
+    }
+    return historyFullString;
+  }
+
+  function addHistory(result) {
+      history.push(result);
+  }
+
+  function updateDiplayHistory() {
+    document.getElementsByClassName('history')
+      .item(0).innerHTML = getHistoryFullString();
   }
 
   updateTaskList();
