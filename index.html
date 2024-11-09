@@ -290,6 +290,7 @@ function moveToTasks(item, index, currentArray) {
   function addHistory(result) {
       historyCaraOuCoroa.push(result);
       updateDiplayHistory();
+      updateDiplayLastUpdate();
   }
 
   function updateDiplayHistory() {
@@ -298,7 +299,7 @@ function moveToTasks(item, index, currentArray) {
   }
 
   function updateDiplayLastUpdate() {
-		const date = new Date();
+    const date = new Date();
     const day = date.getUTCDate();
     const month = date.getUTCMonth() + 1;
     const year = date.getUTCFullYear();
