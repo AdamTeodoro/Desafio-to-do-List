@@ -305,11 +305,16 @@ function moveToTasks(item, index, currentArray) {
     const year = date.getUTCFullYear();
     const hour = date.getHours() < 10? '0' + date.getHours(): date.getHours();
     const minutes = date.getMinutes() < 10? '0' + date.getMinutes(): date.getMinutes();
-    
-    document.getElementsByClassName('lastUpdate')
-      .item(0).innerHTML = `${day}/${month}/${year} - ${hour}:${minutes}`;
+    localStorage.setItem('lastUpdate', `${day}/${month}/${year} - ${hour}:${minutes}`);
+    setDisplay();
   }
 
+  function setDisplayDate() {
+    const lastUpdate = localStorage.getItem('lastUpdate');
+    document.getElementsByClassName('lastUpdate')
+      .item(0).innerHTML = lastUpdate;
+  }
+  setDisplayDate();
   updateTaskList();
   updateWorkingList();
   updateDoneList();
