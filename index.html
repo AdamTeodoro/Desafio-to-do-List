@@ -96,6 +96,7 @@
             <button onclick="caraOuCoroa()">Cara ou coroa</button>
           </div>
           <h2>Histórico</h2>
+          <div class="lastUpdate"></div>
           <div class="history"></div>
         </div>
   
@@ -294,6 +295,16 @@ function moveToTasks(item, index, currentArray) {
   function updateDiplayHistory() {
     document.getElementsByClassName('history')
       .item(0).innerHTML = getHistoryFullString();
+  }
+
+  function updateDiplayLastUpdate() {
+    const day = d.getUTCDate();
+    const month = d.getUTCMonth() + 1;
+    const year = d.getUTCFullYear();
+    const hour = data.getHours();
+    const minutes = data.getMinutes();
+    document.getElementsByClassName('lastUpdate')
+      .item(0).innerHTML = `${day}/${month}/${year} - ${hour}:${minutes}`;
   }
 
   updateTaskList();
