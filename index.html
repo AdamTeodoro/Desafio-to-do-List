@@ -300,7 +300,8 @@ function moveToTasks(item, index, currentArray) {
 
   function updateDiplayLastUpdate() {
     const date = new Date();
-    const day = date.getUTCDate() - 1 < 10? '0' + (date.getUTCDate() - 1): date.getUTCDate() - 1;
+    const calcDay = date.getUTCDate() - 1;
+    const day = calcDay < 10? '0' + calcDay: calcDay;
     const month = date.getUTCMonth() + 1 < 10? '0' + date.getUTCMonth() + 1: date.getUTCMonth() + 1;
     const year = date.getUTCFullYear();
     const hour = date.getHours() < 10? '0' + date.getHours(): date.getHours();
