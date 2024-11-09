@@ -300,11 +300,11 @@ function moveToTasks(item, index, currentArray) {
 
   function updateDiplayLastUpdate() {
     const date = new Date();
-    const day = date.getUTCDate();
-    const month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate() < 10? '0' + date.getUTCDate(): date.getUTCDate();
+    const month = date.getUTCMonth() + 1 < 10? '0' + date.getUTCMonth() + 1: date.getUTCMonth() + 1;
     const year = date.getUTCFullYear();
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
+    const hour = date.getHours() < 10? '0' + date.getHours(): date.getHours();
+    const minutes = date.getMinutes() < 10? '0' + date.getMinutes(): date.getMinutes();
     
     document.getElementsByClassName('lastUpdate')
       .item(0).innerHTML = `${day}/${month}/${year} - ${hour}:${minutes}`;
