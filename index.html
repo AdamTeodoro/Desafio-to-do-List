@@ -312,8 +312,9 @@ function moveToTasks(item, index, currentArray) {
   function setDisplayDate() {
     const lastUpdate = localStorage.getItem('lastUpdate');
     document.getElementsByClassName('lastUpdate')
-      .item(0).innerHTML = lastUpdate;
+      .item(0).innerHTML = lastUpdate? lastUpdate: "";
   }
+  
   setDisplayDate();
   updateTaskList();
   updateWorkingList();
