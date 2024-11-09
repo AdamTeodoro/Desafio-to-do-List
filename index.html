@@ -298,11 +298,13 @@ function moveToTasks(item, index, currentArray) {
   }
 
   function updateDiplayLastUpdate() {
-    const day = d.getUTCDate();
-    const month = d.getUTCMonth() + 1;
-    const year = d.getUTCFullYear();
-    const hour = data.getHours();
-    const minutes = data.getMinutes();
+		const date = new Date();
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1;
+    const year = date.getUTCFullYear();
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+    
     document.getElementsByClassName('lastUpdate')
       .item(0).innerHTML = `${day}/${month}/${year} - ${hour}:${minutes}`;
   }
